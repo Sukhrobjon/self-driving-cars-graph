@@ -47,7 +47,7 @@ class Graph:
         """Initialize a graph object with an empty dictionary."""
         self.vert_dict = {}
         # unique edge_list
-        self.edge_list = [] 
+        self.edge_list = []
         self.num_vertices = 0
         self.num_edges = 0
         self.DEFAULT_WEIGHT = 0
@@ -274,17 +274,17 @@ class Graph:
             for neighbor in current_vertex.neighbors:
                 # check if the neighbor is visited 
                 if neighbor.data not in visited_nodes:
-                    
+
                     queue.put(neighbor)
                     visited_nodes.add(neighbor.data)
                     parent_pointers[neighbor.data] = current_vertex.data
                     level_reference[neighbor.data] = level_reference[current_vertex.data] + 1
-        
+
         return (bfs_order, level_reference)
 
     def n_level_bfs(self, from_vertex, n_level):
-        """Find all nth level connections of 
-        
+        """Find all nth level connections of starting node
+
         Args:
             vertex (str): given vertex to find its all neighors
             n_level (int): certain connection level away from vertex
@@ -359,7 +359,7 @@ class Graph:
 
         return []
 
-    def find_fastest_path(self, from_vertex, to_vertex):
+    def find_fastest_route(self, from_vertex, to_vertex):
         """Finds for the shortest path from vertex a to b using
         Dijkstra's algorithm:
         https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
@@ -385,11 +385,11 @@ class Graph:
         # Initialize our priority queue and path
         queue = PriorityQueue()
         queue.put(PriorityEntry(0, starting_vert))
-        path = {starting_vert.key: (0, None)}
+        path = {starting_vert.data: (0, None)}
 
         # Iterate through all the verts and enqueue them
         for vert_key, vert in self.vert_dict.items():
-            if vert_key != starting_vert.key:
+            if vert_key != starting_vert.data:
                 path[vert_key] = (float("inf"), None)
                 queue.put(PriorityEntry(float("inf"), vert))
 
@@ -398,19 +398,18 @@ class Graph:
 
             # Grab the piece of data from the queue and get it's current weight
             curr_vert = queue.get().data
-            curr_vert_weight, _ = path[curr_vert.key]
-
+            curr_vert_weight, _ = path[curr_vert.data]
             # Iterate through the neighbors of the current vertex
-            for neighbor, weight in curr_vert.neighbors:
+            for neighbor, weight in curr_vert.neighbors.items():
 
                 # Get the neighbors weight
-                prev_neighbor_weight, _ = path[neighbor.key]
+                prev_neighbor_weight, _ = path[neighbor.data]
                 total_weight = weight + curr_vert_weight
 
                 # Check if the new total weight is greater than what the
                 # neighbors previous weight is
                 if total_weight < prev_neighbor_weight:
-                    path[neighbor.key] = (total_weight, curr_vert)
+                    path[neighbor.data] = (total_weight, curr_vert)
                     queue.put(PriorityEntry(total_weight, neighbor))
 
         # No path was found to the vertex, infinite weight away.
@@ -422,7 +421,8 @@ class Graph:
         minimal_path = [self.vert_dict[to_vertex]]
         while prev:
             minimal_path.append(prev)
-            _, prev = path[prev.key]
+            print(f"prev {prev}")
+            _, prev = path[prev.data]
 
         return minimal_path, overall_weight
 

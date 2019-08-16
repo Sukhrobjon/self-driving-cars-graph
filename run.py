@@ -11,17 +11,21 @@ def main(filename):
     seperator = "========================="
 
     from_vertex = "A"
-    to_vertex = "B"
+    to_vertex = "C"
     # grab the edges and vertices from graph object
     g_edges = graph.edge_list
     g_vertices = graph.get_vertices()
 
-    print(f'{seperator}Chapter 1: Make a graph{seperator}')
+    print(f'{seperator}Visualize the map: Make a graph{seperator}')
     print(f'Vertices: {g_vertices}')
     print(f'Number of Edges: {len(g_edges)}')
     print("The Edge List:")
     for edge in g_edges:
         print(edge)
+
+    print(f'{seperator}Problem One{seperator}')
+    print(f"Dijkstras path {graph.find_fastest_route(from_vertex, to_vertex)}")
+
 
 if __name__ == "__main__":
 
