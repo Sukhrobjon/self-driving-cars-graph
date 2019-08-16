@@ -10,7 +10,7 @@ def main(filename):
 
     seperator = "========================="
 
-    from_vertex = "A"
+    from_vertex = "G"
     to_vertex = "C"
     # grab the edges and vertices from graph object
     g_edges = graph.edge_list
@@ -24,7 +24,14 @@ def main(filename):
         print(edge)
 
     print(f'{seperator}Problem One{seperator}')
-    print(f"Dijkstras path {graph.find_fastest_route(from_vertex, to_vertex)}")
+    fastest_route = graph.find_fastest_route(from_vertex, to_vertex)
+
+    if fastest_route:
+        print(f"Fastest route from {from_vertex} to {to_vertex} is: ", end="")
+        print(*fastest_route[0], sep="->", end=" ")
+        print(f"with total distance of {fastest_route[1]} miles!")
+    else:
+        print(f"We couldn't find route from {from_vertex} to {to_vertex}")
 
 
 if __name__ == "__main__":

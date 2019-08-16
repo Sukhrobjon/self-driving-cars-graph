@@ -252,16 +252,15 @@ class Graph:
         parent_pointers = {}
         bfs_order = []
         level_reference = {}
-        
-        # enqueue the starter node, visit and add to the parent_pointer
+
         current_vertex = self.vert_dict[from_vertex]
+        # enqueue the starter node
         queue.put(current_vertex)
         visited_nodes.add(current_vertex.data)
-        # set the parent node as none 
+        # set the parent node as none
         parent_pointers[current_vertex.data] = None
         # to store how far from the starter node
         level_reference[current_vertex.data] = 0
-        
 
         # start traversing
         level_counter = 0
@@ -272,7 +271,7 @@ class Graph:
             level_counter += 1
 
             for neighbor in current_vertex.neighbors:
-                # check if the neighbor is visited 
+                # check if the neighbor is visited
                 if neighbor.data not in visited_nodes:
 
                     queue.put(neighbor)
@@ -418,13 +417,32 @@ class Graph:
             return [], overall_weight
 
         # Recreate the path
-        minimal_path = [self.vert_dict[to_vertex]]
+        goal = self.vert_dict[to_vertex]
+        minimal_path = [goal]
+
         while prev:
             minimal_path.append(prev)
-            print(f"prev {prev}")
             _, prev = path[prev.data]
 
-        return minimal_path, overall_weight
+        # grab only vertex data to make it easy to visualize
+        minimal_path = [node.data for node in minimal_path]
+
+        return minimal_path[::-1], overall_weight
+
+    def minimum_spanning_tree(self, from_vertex):
+        """Function finds the minimum spanning tree using Prim's
+        algorithm. https://en.wikipedia.org/wiki/Prim%27s_algorithm
+
+        This helps to travel the all possible destination going mimimum
+        miles, starting at the arbitrary location
+
+        Args:
+            from_vertex(str): Starting point at the graph
+
+        Returns:
+            min_tree(list): list of the vertices
+        """
+        pass
 
     def clique(self):
         """Finds a clique in a graph that cannot have any other vertices added
