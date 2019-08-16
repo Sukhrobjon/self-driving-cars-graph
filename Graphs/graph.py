@@ -290,7 +290,8 @@ class Graph:
 
         Returns:
             all nodes (list): all nodes found at the nth level
-                              if there is no given level of connections raises value error
+                              if there is no given level of connections raises
+                              value error
         """
         # check if starter node is in the graph
         if from_vertex not in self.vert_dict:
@@ -429,20 +430,20 @@ class Graph:
 
         return minimal_path[::-1], overall_weight
 
-    def minimum_spanning_tree(self, from_vertex):
-        """Function finds the minimum spanning tree using Prim's
-        algorithm. https://en.wikipedia.org/wiki/Prim%27s_algorithm
+    # def minimum_spanning_tree(self, from_vertex):
+    #     """Function finds the minimum spanning tree using Prim's
+    #     algorithm. https://en.wikipedia.org/wiki/Prim%27s_algorithm
 
-        This helps to travel the all possible destination going mimimum
-        miles, starting at the arbitrary location
+    #     This helps to travel the all possible destination going mimimum
+    #     miles, starting at the arbitrary location
 
-        Args:
-            from_vertex(str): Starting point at the graph
+    #     Args:
+    #         from_vertex(str): Starting point at the graph
 
-        Returns:
-            min_tree(list): list of the vertices
-        """
-        pass
+    #     Returns:
+    #         min_tree(list): list of the vertices
+    #     """
+    #     pass
 
     def busiest_intersection(self):
         """Find the busiest intersection by determining the most connected
@@ -469,8 +470,31 @@ class Graph:
 
         return busy_intersections, max_neighbor
 
-    def find_near_me(self, from_vertex):
-        
+    def find_near_me(self, from_vertex, n_miles):
+        """Find the all vertices(locations) n_miles away from the starting
+        vertex
+
+        Args:
+            from_vertex(str): starting point
+            n_miles(int): n_miles away from starting point
+
+        Returns:
+            locations(list): list of all vertices at least n_miles away
+            from starting point
+        """
+        near_locations = []
+
+        for vertex in self.vert_dict:
+            curr_vert = self.vert_dict[vertex]
+            if curr_vert.data != from_vertex:
+                # get the fastest way to each locations
+                dist = self.find_fastest_route(from_vertex, curr_vert.data)
+                if dist[1] <= n_miles:
+                    # add to near locations if the distance is less than the
+                    # specified n_miles away
+                    near_locations.append(curr_vert.data)
+        return near_locations
+
     def clique(self):
         """Finds a clique in a graph that cannot have any other vertices added
         to it (note this is a maximal clique)

@@ -10,7 +10,7 @@ def main(filename):
 
     seperator = "========================="
 
-    from_vertex = "G"
+    from_vertex = "A"
     to_vertex = "C"
     # grab the edges and vertices from graph object
     g_edges = graph.edge_list
@@ -40,6 +40,12 @@ def main(filename):
     print(f" connected {busy_intersection[1]} of intersections.")
 
     print(f"{seperator}Problem Three: Find near me{seperator}")
+    n_miles = 25
+    near_locations = graph.find_near_me(from_vertex, n_miles)
+    print(f"These locations are {n_miles} away from {from_vertex}.")
+    print("Locations are:", end=" ")
+
+    print(*near_locations, sep=", ")
 
 if __name__ == "__main__":
 
