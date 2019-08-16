@@ -10,8 +10,8 @@ def main(filename):
 
     seperator = "========================="
 
-    from_vertex = "1"
-    to_vertex = "4"
+    from_vertex = "A"
+    to_vertex = "B"
     # grab the edges and vertices from graph object
     g_edges = graph.edge_list
     g_vertices = graph.get_vertices()
