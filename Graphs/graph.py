@@ -444,6 +444,33 @@ class Graph:
         """
         pass
 
+    def busiest_intersection(self):
+        """Find the busiest intersection by determining the most connected
+        vertex.
+
+        Returns:
+            busy_vertex(str): The most connected vertex
+        """
+        # store the num of neighbors to compare later
+        num_neighbor = []
+        for vertex in self.vert_dict:
+            curr_vert = self.vert_dict[vertex]
+            num_neighbor.append(len(curr_vert.neighbors))
+
+        # get the max num of vertex
+        max_neighbor = max(num_neighbor)
+
+        # finding the all busiest intersection
+        busy_intersections = []
+        for vertex in self.vert_dict:
+            curr_vert = self.vert_dict[vertex]
+            if len(curr_vert.neighbors) == max_neighbor:
+                busy_intersections.append(curr_vert.data)
+
+        return busy_intersections, max_neighbor
+
+    def find_near_me(self, from_vertex):
+        
     def clique(self):
         """Finds a clique in a graph that cannot have any other vertices added
         to it (note this is a maximal clique)

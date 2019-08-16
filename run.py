@@ -23,7 +23,7 @@ def main(filename):
     for edge in g_edges:
         print(edge)
 
-    print(f'{seperator}Problem One{seperator}')
+    print(f'{seperator}Problem One: Fastest Route{seperator}')
     fastest_route = graph.find_fastest_route(from_vertex, to_vertex)
 
     if fastest_route:
@@ -33,6 +33,13 @@ def main(filename):
     else:
         print(f"We couldn't find route from {from_vertex} to {to_vertex}")
 
+    print(f"{seperator}Problem Two: Busiest Intersection{seperator}")
+    busy_intersection = graph.busiest_intersection()
+    # print(f"Busy intersection(s) {busy_intersection[0]}")
+    print(*busy_intersection[0], sep=", ", end="")
+    print(f" connected {busy_intersection[1]} of intersections.")
+
+    print(f"{seperator}Problem Three: Find near me{seperator}")
 
 if __name__ == "__main__":
 
