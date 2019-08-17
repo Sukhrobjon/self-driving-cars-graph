@@ -44,7 +44,6 @@ def main(filename):
     near_locations = graph.find_near_me(from_vertex, n_miles)
     print(f"These locations are {n_miles} away from {from_vertex}.")
     print("Locations are:", end=" ")
-
     print(*near_locations, sep=", ")
 
 if __name__ == "__main__":
