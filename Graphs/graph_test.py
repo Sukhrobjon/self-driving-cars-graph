@@ -36,6 +36,33 @@ class VertexTest(unittest.TestCase):
 
 class GraphTest(unittest.TestCase):
 
+    def test_add_vertex(self):
+        graph = Graph(directed=False)
+        graph.add_vertex("A")
+        graph.add_vertex("B")
+
+        self.assertEqual(2, len(graph.get_vertices()))
+        self.assertIsInstance(graph.get_vertex('A'), Vertex)
+
+    def test_add_edge(self):
+        graph = Graph()
+        graph.add_vertex("A")
+        graph.add_vertex("B")
+        graph.add_vertex("C")
+
+        graph.add_edge("A", "C")
+        graph.add_edge("A", "C", 3)
+
+        self.assertEqual(3, len(graph.get_vertices()))
+        self.assertEqual(2, len(graph.edge_list))
+        graph.add_vertex("E")
+        graph.add_vertex("F")
+        graph.add_edge("E", "F")
+
+        self.assertEqual(5, graph.num_vertices)
+        self.assertEqual(3, graph.num_edges)
+        self.assertCountEqual(["A", "B", "C", "E", "F"], graph.get_vertices())
+
     def test_find_fastest_route(self):
         pass
 

@@ -78,7 +78,7 @@ class Graph:
         self.vert_dict[key] = new_vertex
         self.num_vertices += 1
 
-        return new_vertex
+        return self.vert_dict[key]
 
     def get_vertex(self, key):
         """Obtains the key(vertex) from graph
@@ -90,7 +90,7 @@ class Graph:
             vertex(Vertex): asked vertex object none if not found
         """
         if key in self.vert_dict.keys():
-            return key
+            return self.vert_dict[key]
         return None
 
     def get_neighbors_of(self, vertex):
@@ -146,6 +146,7 @@ class Graph:
 
         # add edges to unique edge_list
         self.edge_list.append(edge)
+        self.num_edges += 1
 
     def get_vertices(self):
         """Return all the vertices in the graph"""
