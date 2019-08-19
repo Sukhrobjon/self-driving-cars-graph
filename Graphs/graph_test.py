@@ -37,7 +37,7 @@ class VertexTest(unittest.TestCase):
 class GraphTest(unittest.TestCase):
 
     def test_add_vertex(self):
-        graph = Graph(directed=False)
+        graph = Graph()
         graph.add_vertex("A")
         graph.add_vertex("B")
 

@@ -175,22 +175,22 @@ class Graph:
         """
 
         if from_vertex not in self.vert_dict or to_vertex not in self.vert_dict:
-            raise KeyError("Either or both of the keys are not in the graph!")
+            raise KeyError("One of the vertex doesn't exist!")
 
-        starting_vert = self.vert_dict[from_vertex]
+        start_vertex = self.vert_dict[from_vertex]
 
-        # Vertex is to itself, no edges which means no weight!
+        # if the goal and destination at the same vertex
         if from_vertex == to_vertex:
-            return [starting_vert], 0
+            return [start_vertex], 0
 
         # Initialize our priority queue and path
         queue = PriorityQueue()
-        queue.put(PriorityEntry(0, starting_vert))
-        path = {starting_vert.data: (0, None)}
+        queue.put(PriorityEntry(0, start_vertex))
+        path = {start_vertex.data: (0, None)}
 
-        # Iterate through all the verts and enqueue them
+        # Enqueue all vertices in the graph
         for vert_key, vert in self.vert_dict.items():
-            if vert_key != starting_vert.data:
+            if vert_key != start_vertex.data:
                 path[vert_key] = (float("inf"), None)
                 queue.put(PriorityEntry(float("inf"), vert))
 
@@ -214,9 +214,9 @@ class Graph:
                     queue.put(PriorityEntry(total_weight, neighbor))
 
         # No path was found to the vertex, infinite weight away.
-        overall_weight, prev = path[to_vertex]
-        if overall_weight == float("inf"):
-            return [], overall_weight
+        total_weight, prev = path[to_vertex]
+        if total_weight == float("inf"):
+            return [], total_weight
 
         # Recreate the path
         goal = self.vert_dict[to_vertex]
@@ -229,7 +229,7 @@ class Graph:
         # grab only vertex data to make it easy to visualize
         minimal_path = [node.data for node in minimal_path]
 
-        return minimal_path[::-1], overall_weight
+        return minimal_path[::-1], total_weight
 
     def busiest_intersection(self):
         """Find the busiest intersection by determining the most connected
