@@ -17,7 +17,7 @@
 #### Details
 - It is assumed that the graph is undirected
 - Documentation can be found [here](https://github.com/Sukhrobjon/self-driving-cars-graph/blob/master/documentation.md)
-- [Blog post]() on medium
+- [Blog post](https://medium.com/@sukhrobgolibboev/modeling-google-maps-using-graph-theory-b7e90a6cf3e0) on medium
 
 ### Installing
 
