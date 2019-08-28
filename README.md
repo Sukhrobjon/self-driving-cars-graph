@@ -61,7 +61,7 @@ Locations are: C, D, E, F, G
 
 ## Authors
 
-* **Sukhrob Golibboev** - *Initial work* - [Modeling Maps](https://github.com/PurpleBooth)
+* **Sukhrob Golibboev** - *Initial work* - [Modeling Maps](https://github.com/sukhrobjon)
 
 ## License
 
